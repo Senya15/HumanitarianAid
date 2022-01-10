@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class Truck {
 
-    static final int CONTAINER_IN_TRUCK = 12;
+   public static final int CONTAINER_IN_TRUCK = 12;
 
 }
