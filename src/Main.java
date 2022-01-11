@@ -3,19 +3,19 @@ import java.util.Scanner;
 
 public class Main {
 
-//static final int CONTAINER_IN_TRUCK = 12;
-//static final int BOX_IN_CONTAINER = 27;
-public static int box;
+public static int intBox;
 
     public static void main(String[] args) {
 
-        int countTruck;
-        int countContainer = 0;
-        int countContainerRemainder = 0;
-        double boxInTruck = Truck.CONTAINER_IN_TRUCK * Container.BOX_IN_CONTAINER;
+        int truckAmount;
+        int containerAmount;
+        int boxAmount;
+        int boxInTruck = Constant.CONTAINER_IN_TRUCK * Constant.BOX_IN_CONTAINER;
 
         ArrayList<Truck> trucks = new ArrayList<>();
         ArrayList<Container> containers = new ArrayList<>();
+        ArrayList<Box> boxes = new ArrayList<>();
+
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Введите количество ящиков. ");
@@ -26,35 +26,44 @@ public static int box;
                 System.out.println();
                 sc.next();
             }
-            box = sc.nextInt();
-        } while (box <= 0);
+            intBox = sc.nextInt();
+        } while (intBox <= 0);
 
 
-        countTruck = box < boxInTruck ? 1 : (int) Math.ceil(box / boxInTruck);
-
-        for (int i = 0; i < countTruck; i++)
+        int truckAmount2 = intBox < boxInTruck ? 1 : (intBox / boxInTruck);
+        exit:
+        for (int i = 0; ; i++)
         {
             Truck truck = new Truck();
             trucks.add(truck);
-            System.out.println("Грузовик " + (trucks.indexOf(truck) + 1));
+            truckAmount = (trucks.indexOf(truck) + 1);
+            System.out.println("\nГрузовик " + truckAmount);
 
-            countContainer = (int) Math.ceil((double) box / Container.BOX_IN_CONTAINER);
-            countContainerRemainder = box % Container.BOX_IN_CONTAINER;
+//            containerAmount = (int) Math.ceil((double) intBox / Container.BOX_IN_CONTAINER);
+//            countContainerRemainder = intBox % Container.BOX_IN_CONTAINER;
 
-            for (int x = 0; x < Truck.CONTAINER_IN_TRUCK; x++)
+            for (int j = 0; j < Constant.CONTAINER_IN_TRUCK; j++)
             {
                 Container container = new Container();
                 containers.add(container);
-                System.out.println("Контейнер " + (containers.indexOf(container) + 1));
+                containerAmount = (containers.indexOf(container) + 1);
+                System.out.println("15____________________\n" + "\tКонтейнер " + containerAmount);
+
+                for (int x = 0; x < Constant.BOX_IN_CONTAINER; x++)
+                {
+                    Box box = new Box();
+                    boxes.add(box);
+                    boxAmount = (boxes.indexOf(box) + 1);
+                    System.out.println("\t\tЯщик " + boxAmount);
+                    if (boxAmount == intBox) break exit;
+                }
             }
-
         }
+        System.out.println("\n##############################");
+        System.out.println("Необходимо:" +
+                "\n\tГрузовиков: " + truckAmount + " шт." +
+                "\n\tКонтейнеров: " + containerAmount + " шт.");
 
-        System.out.println(countContainer);
-        System.out.println(countContainerRemainder);
+        System.out.println("\n\nВЫЧЕСЛЕННОЕ КОЛИЧЕСТВО ГРУЗОВИКОВ: " + truckAmount2);
     }
-    
-
-
-
-}
+    }
