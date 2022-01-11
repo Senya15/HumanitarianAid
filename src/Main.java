@@ -47,7 +47,7 @@ public static int intBox;
                 Container container = new Container();
                 containers.add(container);
                 containerAmount = (containers.indexOf(container) + 1);
-                System.out.println("15____________________\n" + "\tКонтейнер " + containerAmount);
+                System.out.println("\n____________________\n" + "\tКонтейнер " + containerAmount);
 
                 for (int x = 0; x < Constant.BOX_IN_CONTAINER; x++)
                 {
